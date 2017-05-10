@@ -15,6 +15,7 @@ import AvReplay from 'material-ui/svg-icons/av/replay.js';
 
 import Remaining from './remaining'
 import Chooser from './chooser'
+import SleepShutdownButtons from './sleepShutdownButtons'
 import SingleTimerDirector from '../core/SingleTimerDirector'
 import RendererThreadSignaler from '../core/RendererThreadSignaler'
 
@@ -23,25 +24,19 @@ class Main extends Component {
 		super(props);
 		this.state = {
 			chosenMilliseconds: 3600000,
-			shouldSleep: true
+			shouldSleep: true,
 		};
 		this.handleOnChosen = this.handleOnChosen.bind(this);
 		this.handleOnFinished = this.handleOnFinished.bind(this);
+		this.handleOnModeChanged = this.handleOnModeChanged.bind(this);
 	}
 	render() {
 		// Note to self, don't forget to run dev & hot!
-		var s = {
-			sleep: this.state.shouldSleep,
-		};
-		
 		return(
 			<div className="row main">
 				<MuiThemeProvider>
 					<div style={{width:"90%",margin:"0 auto"}}>
-						<div>
-							<RaisedButton label="Shut Down" primary={!s.sleep} />
-							<RaisedButton label="Sleep" primary={s.sleep} />
-						</div>
+						<SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
 						<div>
 							<Chooser onChosen={this.handleOnChosen} />
 						</div>
@@ -67,6 +62,11 @@ class Main extends Component {
 		} else {
 			this.props.signaler.shutdown();
 		}
+	}
+	handleOnModeChanged(shouldSleep) {
+		this.setState({
+			shouldSleep:shouldSleep
+		});
 	}
 }
 
