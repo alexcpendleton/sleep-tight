@@ -223,5 +223,54 @@ describe('components', () => {
 				expect(wrapper.state().started).toBe(false);
 			});
 		});
+		
+		describe('hasFreshAllotedMilliseconds', () => {
+			it('should return false when .allottedMilliseconds is undefined', () => {
+				const wrapper = shallow(<Remaining />);
+				const result = wrapper.instance()
+					.hasFreshAllottedMilliseconds({});
+				expect(result).toBe(false);
+			});
+			it('should return false when .allottedMilliseconds is 0', () => {
+				const wrapper = shallow(<Remaining />),
+					props = {allottedMilliseconds:0};
+				const result = wrapper.instance()
+					.hasFreshAllottedMilliseconds(props);
+				expect(result).toBe(false);
+			});
+			it('should return false when .allottedMilliseconds is equal to state.allottedMilliseconds', () => {
+				const wrapper = shallow(<Remaining />),
+					newProps = {allottedMilliseconds:300},
+					state = {allottedMilliseconds:300};
+				wrapper.setState(state);
+				const result = wrapper.instance()
+					.hasFreshAllottedMilliseconds(newProps);
+				expect(result).toBe(false);
+			});
+			it('should return true when .allottedMilliseconds != state.allottedMilliseconds', () => {
+				const wrapper = shallow(<Remaining />),
+					newProps = {allottedMilliseconds:500},
+					state = {allottedMilliseconds:300};
+				wrapper.setState(state);
+				const result = wrapper.instance()
+					.hasFreshAllottedMilliseconds(newProps);
+				expect(result).toBe(true);
+			});
+		});
+		describe('initiateStartFromNewPropsIfNecessary', () => {
+			it('should set state.allottedMilliseconds and state.remainingMilliseconds to .allottedMilliseconds when values differ', () => {
+				var timer = spyTimer();
+				const wrapper = shallow(<Remaining timer={timer} />),
+					newProps = {allottedMilliseconds:500},
+					state = {allottedMilliseconds:300};
+				wrapper.setState(state);
+				wrapper.instance()
+					.initiateStartFromNewPropsIfNecessary(newProps);
+				var newState = wrapper.state();
+				expect(newState.allottedMilliseconds).toBe(newProps.allottedMilliseconds);
+				expect(newState.remainingMilliseconds).toBe(newProps.allottedMilliseconds);
+				expect(timer.startNew).toHaveBeenCalled();
+			});
+		});
 	});
 });

@@ -41,20 +41,25 @@ class Remaining extends Component {
     this.restart = this.restart.bind(this);
     this.renderStateMilliseconds = this.renderStateMilliseconds.bind(this);
     this.finish = this.finish.bind(this);
+    this.hasFreshAllottedMilliseconds = this.hasFreshAllottedMilliseconds.bind(this);
   }
   componentWillReceiveProps(newProps) {
     this.initiateStartFromNewPropsIfNecessary(newProps);
   }
+  hasFreshAllottedMilliseconds(props) {
+    if(props.allottedMilliseconds === undefined) return false;
+    if(props.allottedMilliseconds <= 0) return false;
+    if(props.allottedMilliseconds != this.state.allottedMilliseconds) {
+      return true;
+    }
+    return false;
+  }
+
   initiateStartFromNewPropsIfNecessary(newProps) {
-    var remainingMilliseconds = 0,
-      allottedMilliseconds = 0;
-    if(newProps.allottedMilliseconds !== undefined
-      && newProps.allottedMilliseconds > 0) {
-      allottedMilliseconds = newProps.allottedMilliseconds;
-      remainingMilliseconds = newProps.allottedMilliseconds;
+    if(this.hasFreshAllottedMilliseconds(newProps)) {
       this.state = {
-        allottedMilliseconds:allottedMilliseconds,
-        remainingMilliseconds:remainingMilliseconds
+        allottedMilliseconds:newProps.allottedMilliseconds,
+        remainingMilliseconds:newProps.allottedMilliseconds
       };
       this.start();
     }
