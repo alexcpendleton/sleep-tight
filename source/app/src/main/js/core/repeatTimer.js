@@ -30,7 +30,10 @@ class RepeatTimer {
       .every(this.tickInterval, 'ms')
       .for(milliseconds, 'ms')
       .start.now()
-      .always(()=>{callback();});
+      .then(
+        function onSuccess(){callback();},
+        function onFailure(){console.log("on failure", this, arguments)},
+        function onProgress(){});
 
     this.timeoutClearer = function() { };
     this.intervalClearer = function() { };
