@@ -8,6 +8,7 @@ import AvPause from 'material-ui/svg-icons/av/pause.js';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow.js';
 import AvReplay from 'material-ui/svg-icons/av/replay.js';
 import SingleTimerDirector from '../../main/js/core/SingleTimerDirector'
+import RepeatTimer from '../../main/js/core/RepeatTimer'
 
 function setup() {
 	const wrapper = shallow( < Remaining /> )
@@ -85,10 +86,9 @@ describe('components', () => {
 			expect(wrapper.find('#remainingTime').text()).toBe("00:00:00");
 		});
 
-		it('should have props.timer equal a default SingleTimerDirector', ()=>{
+		it('should have props.timer to be defined', ()=>{
 			const wrapper = <Remaining />;
 			expect(wrapper.props.timer).toBeDefined();
-			expect(wrapper.props.timer).toBeInstanceOf(SingleTimerDirector);
 		});
 
 		describe('start', ()=> {

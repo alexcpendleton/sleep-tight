@@ -12,6 +12,9 @@ class Chooser extends Component {
       maxMilliseconds: 7200000
     };
     this.triggerChange = this.triggerChange.bind(this);
+    this._onDragStop = this._onDragStop.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._selectionConcluded = false;
   }
 	render() {
 		return(
@@ -21,17 +24,23 @@ class Chooser extends Component {
           max={this.state.maxMilliseconds}
           step={1000}
           value={this.state.chosenMilliseconds}
-          onChange={this.triggerChange}
+          onDragStop={this._onDragStop}
+          onChange={this._onChange}
          />
       </div>
 		)
 	}
   triggerChange(event, newValue) {
-    if(!this.props.onChosen) return;
+    this.props.onChosen(newValue);
+  }
+  _onChange(event, newValue) {
     this.setState({
       chosenMilliseconds:newValue
-    })
-    this.props.onChosen(newValue);
+    });
+  }
+  _onDragStop(event) {
+    console.log("_onDragStop");
+    this.triggerChange(event, this.state.chosenMilliseconds);
   }
 }
 

@@ -12,7 +12,7 @@ import AvPause from 'material-ui/svg-icons/av/pause.js';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow.js';
 import AvReplay from 'material-ui/svg-icons/av/replay.js';
 
-import SingleTimerDirector from '../core/SingleTimerDirector.js';
+import TimerFacade from '../core/repeatTimer.js';
 
 import _ from 'lodash'
 import injectTapEventPlugin from 'react-tap-event-plugin'; 
@@ -141,7 +141,7 @@ class Remaining extends Component {
 }
 
 Remaining.defaultProps = {
-  timer:new SingleTimerDirector(),
+  timer:new TimerFacade(),
   onFinished:()=> { }
 };
 
