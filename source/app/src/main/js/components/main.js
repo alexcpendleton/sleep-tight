@@ -17,6 +17,8 @@ import Remaining from './remaining'
 import Chooser from './chooser'
 import SleepShutdownButtons from './sleepShutdownButtons'
 import SingleTimerDirector from '../core/SingleTimerDirector'
+
+import TimerFacade from '../core/NanoTimerTimer'
 import RendererThreadSignaler from '../core/RendererThreadSignaler'
 
 class Main extends Component {
@@ -44,6 +46,7 @@ class Main extends Component {
 							<Remaining 
 								allottedMilliseconds={this.state.chosenMilliseconds} 
 								onFinished={this.handleOnFinished}
+								timer={this.props.timer}
 								/>
 						</div>
 					</div>
@@ -71,6 +74,7 @@ class Main extends Component {
 }
 
 Main.defaultProps = {
+	timer:new TimerFacade(),
 	signaler:new RendererThreadSignaler()
 };
 export default Main;
