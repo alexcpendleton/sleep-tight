@@ -19,7 +19,6 @@ class RepeatTimer {
     this.onTick = this.onTick.bind(this);
   }
   startNew(callback, milliseconds) {
-    console.log("is this even right?");
     this.stopActive();
 
     this.activeInterval = this.startInterval();
@@ -31,8 +30,8 @@ class RepeatTimer {
       .for(milliseconds, 'ms')
       .start.now()
       .then(
-        function onSuccess(){callback();},
-        function onFailure(){console.log("on failure", this, arguments)},
+        function onSuccess(){callback()},
+        function onFailure(){},
         function onProgress(){});
 
     this.timeoutClearer = function() { };
@@ -41,15 +40,14 @@ class RepeatTimer {
     return this.activeTimer;
   }
   stopActive() {
-    console.log("stopActive", this.activeTimer);
-    if(this.activeTimer && this.activeTimer.stop) {
-      this.activeTimer.stop();
+    if(this.activeTimer && this.activeTimer.pause) {
+      try {
+        this.activeTimer.pause();
+      } catch(ignoreThis){}
     }
-    console.log("stop active", this);
   }
   startInterval() { }
   _onTick() {
-    console.log("ON TICK", this.remainingMilliseconds, this.tickInterval, arguments);
     this.remainingMilliseconds -= this.tickInterval;
     
     this.onTick(this.remainingMilliseconds);

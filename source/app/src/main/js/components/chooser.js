@@ -39,7 +39,6 @@ class Chooser extends Component {
     });
   }
   _onDragStop(event) {
-    //console.log("_onDragStop");
     this.triggerChange(event, this.state.chosenMilliseconds);
   }
 }

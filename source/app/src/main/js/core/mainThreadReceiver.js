@@ -1,5 +1,6 @@
 var ipcMain = require('electron').ipcMain;
-var SleepModeSleeper = require('./sleepers/SleepModeSleeper');
+var SleeperFacade = require('./sleepers/GlobalConsoleLogSleeper');
+//var SleeperFacade = require('./sleepers/SleepModeSleeper');
 var PowerOffPowerSwitcher = require('./powerOffPowerSwitcher')
 var Commands = require('./commands');
 
@@ -7,7 +8,7 @@ class MainThreadReceiver {
   constructor() {
     this.main = ipcMain;
     this.commands = new Commands();
-    this.sleeper = new SleepModeSleeper();
+    this.sleeper = new SleeperFacade();
     this.powerSwitch = new PowerOffPowerSwitcher();
 
     this.invokeSleeper = this.invokeSleeper.bind(this);
