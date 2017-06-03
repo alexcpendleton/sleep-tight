@@ -81,6 +81,7 @@ class Remaining extends Component {
       .startNew({
         callback:this.finish, 
         milliseconds: remaining,
+        tickInterval: 1000,
         onTick:this.tick});
   }
   pause() {
