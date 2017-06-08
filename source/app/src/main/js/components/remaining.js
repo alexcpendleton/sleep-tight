@@ -29,10 +29,6 @@ class Remaining extends Component {
       remainingMilliseconds:0,
       started:false
     };
-
-    this.props.timer.onTick = (ms)=> {
-      this.tick(ms);
-    };
     
     this.start = this.start.bind(this);
     this.pause = this.pause.bind(this);

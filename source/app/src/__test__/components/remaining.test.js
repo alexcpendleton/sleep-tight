@@ -7,10 +7,13 @@ import IconButton from 'material-ui/IconButton';
 import AvPause from 'material-ui/svg-icons/av/pause.js';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow.js';
 import AvReplay from 'material-ui/svg-icons/av/replay.js';
-import SingleTimerDirector from '../../main/js/core/SingleTimerDirector'
+import NanoTimerTimer from '../../main/js/core/nanotimerTimer.js'
 
-function setup() {
-	const wrapper = shallow( < Remaining /> )
+function setup(props) {
+	if(!props) {
+		props = {timer:spyTimer()}
+	}
+	const wrapper = shallow( < Remaining timer={props.timer} /> )
 
 	return wrapper;
 }
@@ -85,10 +88,9 @@ describe('components', () => {
 			expect(wrapper.find('#remainingTime').text()).toBe("00:00:00");
 		});
 
-		it('should have props.timer equal a default SingleTimerDirector', ()=>{
+		it('should have undefined props.timer', ()=>{
 			const wrapper = <Remaining />;
-			expect(wrapper.props.timer).toBeDefined();
-			expect(wrapper.props.timer).toBeInstanceOf(SingleTimerDirector);
+			expect(wrapper.props.timer).not.toBeDefined();
 		});
 
 		describe('start', ()=> {
