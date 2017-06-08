@@ -89,13 +89,11 @@ describe('nanotimerTimer', () => {
       expect(underTest._onTick).toHaveBeenCalledWith(opts);
     });
     it('should return activeTimer', () => {
-    it("should call _onTick with opts on each interval", () => {
       var underTest = new NanoTimerTimer(),
         opts = easyOpts();
       underTest.activeTimer = mockNano();
       var result = underTest.startNew(opts);
       expect(result).toBe(underTest.activeTimer);
-    });
     });
   });
   
