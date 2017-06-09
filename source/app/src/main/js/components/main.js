@@ -16,7 +16,6 @@ import AvReplay from 'material-ui/svg-icons/av/replay.js';
 import Remaining from './remaining'
 import Chooser from './chooser'
 import SleepShutdownButtons from './sleepShutdownButtons'
-import SingleTimerDirector from '../core/SingleTimerDirector'
 
 import TimerFacade from '../core/NanoTimerTimer'
 import RendererThreadSignaler from '../core/RendererThreadSignaler'
