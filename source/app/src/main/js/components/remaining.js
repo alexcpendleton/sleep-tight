@@ -12,8 +12,6 @@ import AvPause from 'material-ui/svg-icons/av/pause.js';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow.js';
 import AvReplay from 'material-ui/svg-icons/av/replay.js';
 
-import SingleTimerDirector from '../core/SingleTimerDirector.js';
-
 import _ from 'lodash'
 import injectTapEventPlugin from 'react-tap-event-plugin'; 
 injectTapEventPlugin();
@@ -22,7 +20,7 @@ class Remaining extends Component {
   constructor(props) {
     super(props);
     this.internalTimer = {
-      startNew:(cb,ms)=>{ this.props.timer.startNew(cb,ms); },
+      startNew:(opts)=>{ this.props.timer.startNew(opts); },
       onTick:(ms)=>{ this.props.timer.onTick(ms); },
       stopActive:()=>{ this.props.timer.stopActive(); }
     };
@@ -31,16 +29,13 @@ class Remaining extends Component {
       remainingMilliseconds:0,
       started:false
     };
-
-    this.props.timer.onTick = (ms)=> {
-      this.tick(ms);
-    };
     
     this.start = this.start.bind(this);
     this.pause = this.pause.bind(this);
     this.restart = this.restart.bind(this);
     this.renderStateMilliseconds = this.renderStateMilliseconds.bind(this);
     this.finish = this.finish.bind(this);
+    this.tick = this.tick.bind(this);
     this.hasFreshAllottedMilliseconds = this.hasFreshAllottedMilliseconds.bind(this);
   }
   componentWillReceiveProps(newProps) {
@@ -79,7 +74,11 @@ class Remaining extends Component {
       started: true
     });
     this.internalTimer
-      .startNew(this.finish, remaining);
+      .startNew({
+        callback:this.finish, 
+        milliseconds: remaining,
+        tickInterval: 1000,
+        onTick:this.tick});
   }
   pause() {
     this.setState({
@@ -141,7 +140,6 @@ class Remaining extends Component {
 }
 
 Remaining.defaultProps = {
-  timer:new SingleTimerDirector(),
   onFinished:()=> { }
 };
 
