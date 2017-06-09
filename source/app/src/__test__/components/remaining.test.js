@@ -129,11 +129,16 @@ describe('components', () => {
 			});
 			it('should call props.timer.startNew with state.allottedMilliseconds', ()=> {
 				const allottedMilliseconds = 90210;
-				var shouldBeCalled = jest.fn();
+				var startNewMock = (opts)=> {
+					expect(opts.callback).toBeInstanceOf(Function);
+					expect(opts.milliseconds).toBe(allottedMilliseconds);
+					expect(opts.tickInterval).toBe(1000);
+					expect(opts.onTick).toBeInstanceOf(Function); 
+				};
 				var props = {
 					timer:{
 						stopActive:jest.fn(),
-						startNew:shouldBeCalled
+						startNew:startNewMock
 					}
 				};
 				const remaining = shallow(<Remaining timer={props.timer}/>);
@@ -141,21 +146,20 @@ describe('components', () => {
 					allottedMilliseconds:allottedMilliseconds
 				});
 				remaining.instance().start();
-				expect(shouldBeCalled)
-					.toHaveBeenCalledWith(expect.any(Function), allottedMilliseconds);
 			});
 			it('should call props.timer.startNew with state.remainingMilliseconds when state.remainingMilliseconds is not equal to 0', ()=> {
 				const allottedMilliseconds = 90210,
 					remainingMilliseconds = 33033;
 				var props = { timer:spyTimer() };
+				props.timer.startNew = (opts)=> {
+					expect(opts.milliseconds).toBe(remainingMilliseconds);
+				};
 				const remaining = shallow(<Remaining timer={props.timer}/>);
 				remaining.setState({
 					allottedMilliseconds: allottedMilliseconds,
 					remainingMilliseconds: remainingMilliseconds
 				});
 				remaining.instance().start();
-				expect(props.timer.startNew)
-					.toHaveBeenCalledWith(expect.any(Function), remainingMilliseconds);
 			});
 		});
 		describe('tick', ()=> {
