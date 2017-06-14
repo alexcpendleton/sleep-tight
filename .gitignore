@@ -40,3 +40,5 @@ jspm_packages
 source/builds/*
 source/.tmp/*
 source/dist/*
+
+source/app/build/*

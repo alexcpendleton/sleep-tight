@@ -40,6 +40,10 @@ module.exports = {
 				from: './src/main/res', 
 				to: path.join(__dirname, '../app/build/res')
 			},
+			{
+				from: './src/main/js/core', 
+				to: path.join(__dirname, '../app/build/js/core')
+			},
 		]),
 		new webpack.NamedModulesPlugin(),
 	],
