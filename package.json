@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
+  "name": "sleep-tight",
+  "productName": "SleepTight",
   "version": "0.12.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Menubar sleep/shutdown timer.",
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings ./test/runTests.js",
     "test-all": "npm run lint && npm run flow && npm run test && npm run build && npm run test-e2e",
@@ -190,6 +190,7 @@
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
     "material-ui": "^0.18.3",
+    "menubar": "^5.2.3",
     "nanotimer": "^0.3.14",
     "power-off": "^1.1.2",
     "react": "^15.5.4",
@@ -199,6 +200,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "sleep-mode": "^1.1.0",

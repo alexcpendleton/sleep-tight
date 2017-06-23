@@ -11,8 +11,7 @@
  * @flow
  */
 import { app, BrowserWindow } from 'electron';
-import MenuBuilder from './menu';
-
+const MainThreadReceiver = require('./core/mainThreadReceiver.js');
 let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
@@ -40,32 +39,63 @@ const installExtensions = async () => {
     .catch(console.log);
 };
 
+var hasBeenSetup = false;
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+//let mainWindow;
+function initMenubar() {
+	var menubar = require('menubar');
+	var IconResolver = require('./core/IconResolver.js');
+
+	var iconPath = new IconResolver(process.platform).resolve();
+
+	var dimensions = getWindowDimensions();
+	
+	var mb = menubar({
+		dir:__dirname,
+		icon:iconPath,
+		preloadWindow:true,
+		width: dimensions.width, 
+		height: dimensions.height,
+    index:`file://${__dirname}/app.html`
+	});
+	mb.on('ready', function ready () {
+		console.log('app is ready');
+	});
+	mb.on('after-show', function afterShow() {
+		if(hasBeenSetup) return;
+
+		if(process.env.NODE_ENV === 'development') {
+			// Open the DevTools.
+			mb.window.webContents.openDevTools();
+		}
+		hasBeenSetup = true;
+	});
+  return menubar;
+}
+
 
 /**
  * Add event listeners...
  */
 
-app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
+function setupSignaling() {
+	new MainThreadReceiver().setup();
+}
+function getWindowDimensions() {
+		if(process.env.NODE_ENV === 'development') {
+			return {width: 1024, height: 768};
+		}
+		return {width:280, height:240};
+}
 
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
 
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728
-  });
-
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  const menubar = initMenubar();
+  mainWindow = menubar.window;
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -73,14 +103,12 @@ app.on('ready', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    mainWindow.show();
-    mainWindow.focus();
+    initMenubar();
+    setupSignaling();
   });
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+
 });
