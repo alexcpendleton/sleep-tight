@@ -96,6 +96,7 @@ app.on('ready', async () => {
 
   const menubar = initMenubar();
   mainWindow = menubar.window;
+  setupSignaling();
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -103,8 +104,6 @@ app.on('ready', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    initMenubar();
-    setupSignaling();
   });
 
   mainWindow.on('closed', () => {
