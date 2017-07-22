@@ -4,7 +4,7 @@ var path = require('path');
 class IconResolver {
   constructor(platform) {
     this.platform = platform;
-    this.resourcePath = "../../resources/icons";
+    this.resourcePath = "./res/icons";
     this.rootPath = __dirname;
     this.win32FileName = "icon.ico";
     this.otherFileName = "IconTemplate.png";

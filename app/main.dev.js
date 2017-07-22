@@ -14,6 +14,12 @@ import { app, BrowserWindow } from 'electron';
 const MainThreadReceiver = require('./core/mainThreadReceiver.js');
 let mainWindow = null;
 
+var elog = require('electron-log');
+elog.info('Hello, log');
+
+var unhandled = require('electron-unhandled');
+unhandled();
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -51,6 +57,7 @@ function initMenubar() {
 
 	var dimensions = getWindowDimensions();
 	
+  elog.warn("before mb.showWindow")
 	var mb = menubar({
 		dir:__dirname,
 		icon:iconPath,
@@ -58,7 +65,9 @@ function initMenubar() {
 		width: dimensions.width, 
 		height: dimensions.height,
     index:`file://${__dirname}/app.html`
-	});
+  });
+  
+  elog.warn("after mb.showWindow")
 	mb.on('ready', function ready () {
 		console.log('app is ready');
 	});
@@ -90,6 +99,7 @@ function getWindowDimensions() {
 }
 
 app.on('ready', async () => {
+  elog.warn("app.on(ready)")
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
@@ -107,6 +117,7 @@ app.on('ready', async () => {
   });
 
   mainWindow.on('closed', () => {
+    elog.warn("mainWindow.on(closed)")
   });
 
 

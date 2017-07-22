@@ -184,6 +184,8 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "electron-debug": "^1.1.0",
+    "electron-log": "^2.2.7",
+    "electron-unhandled": "^0.2.0",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
     "material-ui": "^0.18.3",
