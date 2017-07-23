@@ -6,11 +6,14 @@
     <script>
       (function() {
         if (!process.env.HOT) {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = './materialize.min.css';
-          // HACK: Writing the script path should be done with webpack
-          document.getElementsByTagName('head')[0].appendChild(link);
+          function addStyleSheet(href) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.getElementsByTagName('head')[0].appendChild(link);
+          }
+          addStyleSheet('./res/css/materialize.min.css');
+          addStyleSheet('./app.global.css');
         }
       }());
     </script>

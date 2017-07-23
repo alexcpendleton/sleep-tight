@@ -79,8 +79,9 @@ function initMenubar() {
 			mb.window.webContents.openDevTools();
 		}
 		hasBeenSetup = true;
-	});
-  return menubar;
+  });
+  mainWindow=mb;
+  return mb;
 }
 
 
@@ -105,20 +106,5 @@ app.on('ready', async () => {
   }
 
   const menubar = initMenubar();
-  mainWindow = menubar.window;
   setupSignaling();
-
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-  mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
-    }
-  });
-
-  mainWindow.on('closed', () => {
-    elog.warn("mainWindow.on(closed)")
-  });
-
-
 });
