@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import App from './containers/App';
-import Main from './components/main.js'
+import Main from './components/sleeptight.js'
 
 export default () => (
   <App>

@@ -10,19 +10,20 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
-const MainThreadReceiver = require('./core/mainThreadReceiver.js');
-let mainWindow = null;
-
 var elog = require('electron-log');
 elog.info('Hello, log');
+import { app, BrowserWindow } from 'electron';
+const MainThreadReceiver = require('./core/mainThreadReceiver.js');
+let mainWindow;
+
 
 var unhandled = require('electron-unhandled');
 unhandled();
+console.log("env:", process.env.NODE_ENV, process.env.DEBUG_PROD);
 
 if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support');
-  sourceMapSupport.install();
+  //const sourceMapSupport = require('source-map-support');
+  //sourceMapSupport.install();
 }
 
 if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
@@ -48,7 +49,7 @@ const installExtensions = async () => {
 var hasBeenSetup = false;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-//let mainWindow;
+
 function initMenubar() {
 	var menubar = require('menubar');
 	var IconResolver = require('./core/IconResolver.js');
@@ -88,7 +89,6 @@ function initMenubar() {
 /**
  * Add event listeners...
  */
-
 function setupSignaling() {
 	new MainThreadReceiver().setup();
 }
@@ -108,3 +108,5 @@ app.on('ready', async () => {
   const menubar = initMenubar();
   setupSignaling();
 });
+
+elog.warn("elog end")
