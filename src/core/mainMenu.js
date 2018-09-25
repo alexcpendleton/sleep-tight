@@ -8,11 +8,9 @@ export class MainMenu {
   initialize() {
     this.setTrayHandler();
   }
-  setTrayHandler(menu) {
-    menu = menu || this.buildMenu();
-    this.tray.setContextMenu(menu);
+  setTrayHandler() {
     this.tray.on("right-click", () => {
-      this.tray.popUpContextMenu();
+      this.tray.popUpContextMenu(this.buildMenu());
     });
   }
   buildMenu() {
