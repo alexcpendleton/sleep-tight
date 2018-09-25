@@ -1,5 +1,5 @@
-'use strict'
-const NanoTimer = require('nanotimer');
+"use strict";
+const NanoTimer = require("nanotimer");
 
 class NanoTimerTimer {
   constructor() {
@@ -12,14 +12,22 @@ class NanoTimerTimer {
     this.stopActive();
     this.remainingMilliseconds = opts.milliseconds;
     var x = this;
-    this.activeTimer.setTimeout(function() {
-      opts.callback();
-      x.stopActive();
-    }, '', opts.milliseconds + 'm');
-    var intervalText = opts.tickInterval + 'm';
-    this.activeTimer.setInterval(function() {
-      x._onTick(opts);
-    },'', intervalText);
+    this.activeTimer.setTimeout(
+      function() {
+        opts.callback();
+        x.stopActive();
+      },
+      "",
+      opts.milliseconds + "m"
+    );
+    var intervalText = opts.tickInterval + "m";
+    this.activeTimer.setInterval(
+      function() {
+        x._onTick(opts);
+      },
+      "",
+      intervalText
+    );
     return this.activeTimer;
   }
   stopActive() {

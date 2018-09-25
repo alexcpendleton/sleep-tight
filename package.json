@@ -10,7 +10,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --cache --color --ext .jsx,.js src"
+    "lint": "eslint --cache --color --ext .jsx,.js src",
+    "rmp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight"
   },
   "keywords": [],
   "repository": {
@@ -59,16 +60,19 @@
     }
   },
   "dependencies": {
+    "@material-ui/core": "^3.1.1",
+    "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.17",
+    "babel-runtime": "^6.26.0",
     "electron-compile": "^6.4.3",
     "electron-devtools-installer": "^2.1.0",
     "electron-squirrel-startup": "^1.0.0",
-    "material-ui": "^0.20.2",
     "menubar": "^5.2.3",
     "nanotimer": "^0.3.15",
     "power-off": "^1.1.2",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-hot-loader": "^3.0.0-beta.6",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-hot-loader": "^4.3.11",
     "sleep-mode": "^1.1.0",
     "typeface-roboto": "^0.0.54"
   },

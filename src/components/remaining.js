@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import Slider from "material-ui/Slider";
-
-import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
-import AvPause from "material-ui/svg-icons/av/pause.js";
-import AvPlayArrow from "material-ui/svg-icons/av/play-arrow.js";
-import AvReplay from "material-ui/svg-icons/av/replay.js";
+import IconButton from "@material-ui/core/IconButton";
+import AvPause from "@material-ui/icons/pause";
+import AvPlayArrow from "@material-ui/icons/PlayArrow";
+import AvReplay from "@material-ui/icons/replay";
 
 import _ from "lodash";
-//import injectTapEventPlugin from 'react-tap-event-plugin';
-//injectTapEventPlugin();
 
 class Remaining extends Component {
   constructor(props) {

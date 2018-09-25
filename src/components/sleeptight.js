@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
-import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import RaisedButton from "material-ui/RaisedButton";
-import Slider from "material-ui/Slider";
-
-import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
-import AvPause from "material-ui/svg-icons/av/pause.js";
-import AvPlayArrow from "material-ui/svg-icons/av/play-arrow.js";
-import AvReplay from "material-ui/svg-icons/av/replay.js";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 
 import Remaining from "./remaining";
 import Chooser from "./chooser";
 import SleepShutdownButtons from "./sleepShutdownButtons";
 
-import TimerFacade from "../core/NanoTimerTimer";
-import RendererThreadSignaler from "../core/RendererThreadSignaler";
+import TimerFacade from "../core/nanotimerTimer";
+import RendererThreadSignaler from "../core/rendererThreadSignaler";
+
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+const styles = theme => ({
+  layout: {},
+  paper: {}
+});
 
 class Main extends Component {
   constructor(props) {
@@ -32,35 +32,33 @@ class Main extends Component {
     this.handleOnModeChanged = this.handleOnModeChanged.bind(this);
   }
   render() {
+    let theme = createMuiTheme({
+      palette: {
+        type: "dark"
+      }
+    });
+
+    console.log(theme);
     return (
-      <div
-        className="row main"
-        style={{
-          position: "relative",
-          marginTop: "5vh",
-          textAlign: "center",
-          fontFamily: "Roboto, sans-serif"
-        }}
-      >
-        <MuiThemeProvider>
-          <div style={{ width: "90%", margin: "0 auto" }}>
-            <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
-            <div>
-              <Chooser
-                onChosen={this.handleOnChosen}
-                chosenMilliseconds={this.state.chosenMilliseconds}
-              />
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <Remaining
-                allottedMilliseconds={this.state.chosenMilliseconds}
-                onFinished={this.handleOnFinished}
-                timer={this.props.timer}
-              />
-            </div>
+      <React.Fragment>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
+          <div>
+            <Chooser
+              onChosen={this.handleOnChosen}
+              chosenMilliseconds={this.state.chosenMilliseconds}
+            />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <Remaining
+              allottedMilliseconds={this.state.chosenMilliseconds}
+              onFinished={this.handleOnFinished}
+              timer={this.props.timer}
+            />
           </div>
         </MuiThemeProvider>
-      </div>
+      </React.Fragment>
     );
   }
 
@@ -86,4 +84,5 @@ Main.defaultProps = {
   timer: new TimerFacade(),
   signaler: new RendererThreadSignaler()
 };
+
 export default Main;

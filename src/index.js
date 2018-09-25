@@ -14,6 +14,7 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 if (isDevMode) enableLiveReload({ strategy: "react-hmr" });
 
 const createWindow = async () => {
+  console.log("createWindow");
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -25,16 +26,16 @@ const createWindow = async () => {
   const iconPath = `${__dirname}/resources/icons`;
   new Initializer({
     mainWindow,
-    isDevMode,
+    isDevMode: true,
     indexPath,
     iconPath
   }).initialize();
 
   // and load the index.html of the app.
   //mainWindow.loadURL(`file://${__dirname}/index.html`);
-
+  let installDevTools = true;
   // Open the DevTools.
-  if (isDevMode) {
+  if (installDevTools) {
     await installExtension(REACT_DEVELOPER_TOOLS);
     //mainWindow.webContents.openDevTools();
   }

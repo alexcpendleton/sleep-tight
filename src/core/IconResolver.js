@@ -1,4 +1,3 @@
-"use strict";
 var path = require("path");
 
 class IconResolver {
@@ -16,7 +15,6 @@ class IconResolver {
       this.platform == this.win32Platform
         ? this.win32FileName
         : this.otherFileName;
-    console.log("resolve.iconPath", this.rootPath, result);
     var result = path.join(this.rootPath, iconFileName);
     return result;
   }

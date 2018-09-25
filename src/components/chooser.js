@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import Slider from "material-ui/Slider";
+import Slider from "@material-ui/lab/Slider";
 
 import _ from "lodash";
 
