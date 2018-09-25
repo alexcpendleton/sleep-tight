@@ -16,16 +16,20 @@ class SleepShutdownButtons extends Component {
   render() {
     const selected = this.state.sleep ? "sleep" : "shutdown";
     return (
-      <div>
-        <ToggleButtonGroup
-          value={selected}
-          exclusive
-          onChange={this.handleChange}
-        >
-          <ToggleButton value="shutdown">Shut Down</ToggleButton>
-          <ToggleButton value="sleep">Sleep</ToggleButton>
-        </ToggleButtonGroup>
-      </div>
+      <ToggleButtonGroup
+        value={selected}
+        exclusive
+        onChange={this.handleChange}
+        style={{
+          background: "transparent",
+          borderRadius: 0,
+          border: 0,
+          boxShadow: "none"
+        }}
+      >
+        <ToggleButton value="shutdown">Shut Down</ToggleButton>
+        <ToggleButton value="sleep">Sleep</ToggleButton>
+      </ToggleButtonGroup>
     );
   }
   shutdownChosen() {
