@@ -1,9 +1,7 @@
-import React from 'react';
-
+import React from "react";
+import Main from "./components/sleeptight";
 export default class App extends React.Component {
   render() {
-    return (<div>
-      <h2>Welcome to React!</h2>
-    </div>);
+    return <Main />;
   }
 }
