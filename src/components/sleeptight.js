@@ -38,24 +38,25 @@ class Main extends Component {
       }
     });
 
-    console.log(theme);
     return (
       <React.Fragment>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
-          <div>
-            <Chooser
-              onChosen={this.handleOnChosen}
-              chosenMilliseconds={this.state.chosenMilliseconds}
-            />
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <Remaining
-              allottedMilliseconds={this.state.chosenMilliseconds}
-              onFinished={this.handleOnFinished}
-              timer={this.props.timer}
-            />
+          <div style={{ textAlign: "center", padding: "24px 12px 0 12px" }}>
+            <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
+            <div>
+              <Chooser
+                onChosen={this.handleOnChosen}
+                chosenMilliseconds={this.state.chosenMilliseconds}
+              />
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Remaining
+                allottedMilliseconds={this.state.chosenMilliseconds}
+                onFinished={this.handleOnFinished}
+                timer={this.props.timer}
+              />
+            </div>
           </div>
         </MuiThemeProvider>
       </React.Fragment>

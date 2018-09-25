@@ -14,14 +14,11 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 if (isDevMode) enableLiveReload({ strategy: "react-hmr" });
 
 const createWindow = async () => {
-  console.log("createWindow");
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600
   });
 
-  console.log("createWindow, __dirname", `${__dirname}`);
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
   new Initializer({

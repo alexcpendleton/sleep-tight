@@ -3,13 +3,14 @@ import menubar from "menubar";
 import IconResolver from "./IconResolver";
 
 export class Initializer {
-  constructor({ mainWindow, isDevMode, indexPath, iconPath }) {
+  constructor({ mainWindow, isDevMode, indexPath, iconPath, big }) {
     this.mainWindow = mainWindow;
     this.isDevMode = isDevMode || false;
     this.receiver = new MainThreadReceiver();
     this.hasBeenSetup = false;
     this.indexPath = indexPath;
     this.iconPath = iconPath;
+    this.big = big || false;
   }
   initialize() {
     this.hideMainWindow();
@@ -26,17 +27,14 @@ export class Initializer {
   }
 
   getWindowDimensions() {
-    if (this.isDevMode) {
+    if (this.big) {
       return { width: 1024, height: 768 };
     }
-    return { width: 280, height: 240 };
+    return { width: 280, height: 200 };
   }
 
   initMenubar() {
     var iconPath = new IconResolver(process.platform, this.iconPath).resolve();
-    console.log("process.platform", process.platform);
-    console.log("iconPath", iconPath);
-
     var dimensions = this.getWindowDimensions();
     var mb = menubar({
       dir: __dirname,
@@ -53,7 +51,7 @@ export class Initializer {
       if (this.hasBeenSetup) return;
 
       if (this.isDevMode) {
-        mb.window.webContents.openDevTools();
+        mb.window.webContents.openDevTools("detach");
       }
       this.hasBeenSetup = true;
     });
