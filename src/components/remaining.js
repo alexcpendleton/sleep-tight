@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AvPause from "@material-ui/icons/pause";
 import AvPlayArrow from "@material-ui/icons/PlayArrow";
@@ -119,8 +120,8 @@ class Remaining extends Component {
   }
   render() {
     return (
-      <div>
-        <div id="remainingTime">{this.renderStateMilliseconds()}</div>
+      <React.Fragment>
+        <Typography>{this.renderStateMilliseconds()}</Typography>
         <div>
           {this.state.started ? (
             <IconButton id="pause" tooltip="Pause" onClick={this.pause}>
@@ -135,7 +136,7 @@ class Remaining extends Component {
             <AvReplay />
           </IconButton>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
