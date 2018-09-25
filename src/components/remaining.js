@@ -31,8 +31,8 @@ class Remaining extends Component {
       }
     };
     this.state = {
-      allottedMilliseconds: 0,
-      remainingMilliseconds: 0,
+      allottedMilliseconds: props.allottedMilliseconds || 0,
+      remainingMilliseconds: props.allottedMilliseconds || 0,
       started: false
     };
 
@@ -60,11 +60,13 @@ class Remaining extends Component {
 
   initiateStartFromNewPropsIfNecessary(newProps) {
     if (this.hasFreshAllottedMilliseconds(newProps)) {
-      this.state = {
-        allottedMilliseconds: newProps.allottedMilliseconds,
-        remainingMilliseconds: newProps.allottedMilliseconds
-      };
-      this.start();
+      this.setState(
+        {
+          allottedMilliseconds: newProps.allottedMilliseconds,
+          remainingMilliseconds: newProps.allottedMilliseconds
+        },
+        () => this.start()
+      );
     }
   }
   tick(milliseconds) {

@@ -38,14 +38,18 @@ class Main extends Component {
         style={{
           position: "relative",
           marginTop: "5vh",
-          textAlign: "center"
+          textAlign: "center",
+          fontFamily: "Roboto, sans-serif"
         }}
       >
         <MuiThemeProvider>
           <div style={{ width: "90%", margin: "0 auto" }}>
             <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
             <div>
-              <Chooser onChosen={this.handleOnChosen} />
+              <Chooser
+                onChosen={this.handleOnChosen}
+                chosenMilliseconds={this.state.chosenMilliseconds}
+              />
             </div>
             <div style={{ textAlign: "center" }}>
               <Remaining
