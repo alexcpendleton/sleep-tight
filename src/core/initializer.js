@@ -1,9 +1,10 @@
 import MainThreadReceiver from "./mainThreadReceiver";
 import menubar from "menubar";
 import IconResolver from "./IconResolver";
+import { MainMenu } from "./mainMenu";
 
 export class Initializer {
-  constructor({ mainWindow, isDevMode, indexPath, iconPath, big }) {
+  constructor({ mainWindow, isDevMode, indexPath, iconPath, big, app }) {
     this.mainWindow = mainWindow;
     this.isDevMode = isDevMode || false;
     this.receiver = new MainThreadReceiver();
@@ -11,11 +12,13 @@ export class Initializer {
     this.indexPath = indexPath;
     this.iconPath = iconPath;
     this.big = big || false;
+    this.app = app;
   }
   initialize() {
     this.hideMainWindow();
-    this.initMenubar();
+    var mb = this.initMenubar();
     this.setupSignaling();
+    this.setupMainMenu(mb);
   }
   hideMainWindow() {
     if (this.mainWindow) {
@@ -25,7 +28,10 @@ export class Initializer {
   setupSignaling() {
     this.receiver.setup();
   }
-
+  setupMainMenu(mb) {
+    const mm = new MainMenu(this.app, mb.tray);
+    mm.initialize();
+  }
   getWindowDimensions() {
     if (this.big) {
       return { width: 1024, height: 768 };

@@ -51,8 +51,10 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "alexcpendleton",
+        "name": "sleep-tight",
+        "draft": true,
+        "prerelease": true
       },
       "windowsStoreConfig": {
         "packageName": "",

@@ -25,7 +25,8 @@ const createWindow = async () => {
     mainWindow,
     isDevMode: true,
     indexPath,
-    iconPath
+    iconPath,
+    app
   }).initialize();
 
   // and load the index.html of the app.
