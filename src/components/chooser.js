@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 
 import Slider from "@material-ui/lab/Slider";
 
-import _ from "lodash";
-
 class Chooser extends Component {
   constructor(props) {
     super(props);

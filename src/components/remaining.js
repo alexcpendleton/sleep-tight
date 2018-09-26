@@ -7,8 +7,6 @@ import AvPause from "@material-ui/icons/pause";
 import AvPlayArrow from "@material-ui/icons/PlayArrow";
 import AvReplay from "@material-ui/icons/replay";
 
-import _ from "lodash";
-
 class Remaining extends Component {
   constructor(props) {
     super(props);
@@ -107,7 +105,9 @@ class Remaining extends Component {
     this.props.onFinished();
   }
   parsePad(i) {
-    return _.padStart(parseInt(i), 2, "0");
+    return parseInt(i)
+      .toString()
+      .padStart(2, "0");
   }
   renderMilliseconds(milliseconds) {
     var seconds = this.parsePad((milliseconds / 1000) % 60);
