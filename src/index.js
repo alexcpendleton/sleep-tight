@@ -23,14 +23,13 @@ const createWindow = async () => {
   const iconPath = `${__dirname}/resources/icons`;
   new Initializer({
     mainWindow,
-    isDevMode: true,
+    isDevMode,
     indexPath,
     iconPath,
-    app
+    app,
+    openDevTools: isDevMode
   }).initialize();
 
-  // and load the index.html of the app.
-  //mainWindow.loadURL(`file://${__dirname}/index.html`);
   let installDevTools = true;
   // Open the DevTools.
   if (installDevTools) {
@@ -68,6 +67,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

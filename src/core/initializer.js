@@ -4,7 +4,15 @@ import IconResolver from "./IconResolver";
 import { MainMenu } from "./mainMenu";
 
 export class Initializer {
-  constructor({ mainWindow, isDevMode, indexPath, iconPath, big, app }) {
+  constructor({
+    mainWindow,
+    isDevMode,
+    indexPath,
+    iconPath,
+    big,
+    app,
+    openDevTools
+  }) {
     this.mainWindow = mainWindow;
     this.isDevMode = isDevMode || false;
     this.receiver = new MainThreadReceiver();
@@ -13,6 +21,7 @@ export class Initializer {
     this.iconPath = iconPath;
     this.big = big || false;
     this.app = app;
+    this.openDevTools = this.openDevTools || false;
   }
   initialize() {
     this.hideMainWindow();
@@ -56,7 +65,7 @@ export class Initializer {
     mb.on("after-show", () => {
       if (this.hasBeenSetup) return;
 
-      if (this.isDevMode) {
+      if (this.openDevTools) {
         mb.window.webContents.openDevTools("detach");
       }
       this.hasBeenSetup = true;
