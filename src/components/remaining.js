@@ -8,7 +8,7 @@ import AvPlayArrow from "@material-ui/icons/PlayArrow";
 import AvReplay from "@material-ui/icons/replay";
 
 class Remaining extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.internalTimer = {
       startNew: opts => {
@@ -119,20 +119,38 @@ class Remaining extends Component {
     return this.renderMilliseconds(this.state.remainingMilliseconds);
   }
   render() {
+    const buttonStyle = { color: this.props.theme.palette.text.secondary };
     return (
       <React.Fragment>
-        <Typography>{this.renderStateMilliseconds()}</Typography>
+        <Typography color="textSecondary" style={{ padding: "10px 0" }}>
+          {this.renderStateMilliseconds()}
+        </Typography>
         <div>
           {this.state.started ? (
-            <IconButton id="pause" tooltip="Pause" onClick={this.pause}>
+            <IconButton
+              id="pause"
+              tooltip="Pause"
+              onClick={this.pause}
+              style={buttonStyle}
+            >
               <AvPause />
             </IconButton>
           ) : (
-            <IconButton id="start" tooltip="Start" onClick={this.start}>
+            <IconButton
+              id="start"
+              tooltip="Start"
+              onClick={this.start}
+              style={buttonStyle}
+            >
               <AvPlayArrow />
             </IconButton>
           )}
-          <IconButton id="restart" tooltip="Restart" onClick={this.restart}>
+          <IconButton
+            id="restart"
+            tooltip="Restart"
+            onClick={this.restart}
+            style={buttonStyle}
+          >
             <AvReplay />
           </IconButton>
         </div>

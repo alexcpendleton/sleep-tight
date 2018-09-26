@@ -55,6 +55,7 @@ class Main extends Component {
                 allottedMilliseconds={this.state.chosenMilliseconds}
                 onFinished={this.handleOnFinished}
                 timer={this.props.timer}
+                theme={theme}
               />
             </div>
           </div>
