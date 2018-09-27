@@ -11,7 +11,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src",
-    "rmp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight"
+    "omp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight"
   },
   "keywords": [],
   "repository": {

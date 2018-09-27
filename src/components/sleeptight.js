@@ -32,9 +32,15 @@ class Main extends Component {
     this.handleOnModeChanged = this.handleOnModeChanged.bind(this);
   }
   render() {
-    let theme = createMuiTheme({
+    const theme = createMuiTheme({
       palette: {
-        type: "dark"
+        type: "dark",
+        primary: {
+          main: "#007AFF"
+        },
+        secondary: {
+          main: "#007AFF"
+        }
       }
     });
 
@@ -44,7 +50,7 @@ class Main extends Component {
           <CssBaseline />
           <div style={{ textAlign: "center", padding: "24px 12px 0 12px" }}>
             <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
-            <div>
+            <div style={{ marginTop: "12px" }}>
               <Chooser
                 onChosen={this.handleOnChosen}
                 chosenMilliseconds={this.state.chosenMilliseconds}

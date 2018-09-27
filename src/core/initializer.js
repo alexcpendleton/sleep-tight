@@ -51,13 +51,15 @@ export class Initializer {
   initMenubar() {
     var iconPath = new IconResolver(process.platform, this.iconPath).resolve();
     var dimensions = this.getWindowDimensions();
+    const alwaysOnTop = false;
     var mb = menubar({
       dir: __dirname,
       icon: iconPath,
       preloadWindow: true,
       width: dimensions.width,
       height: dimensions.height,
-      index: this.indexPath
+      index: this.indexPath,
+      alwaysOnTop
     });
     mb.on("ready", () => {
       console.log("app is ready");
