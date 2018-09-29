@@ -1,4 +1,4 @@
-var path = require("path");
+const path = require("path");
 
 class IconResolver {
   constructor(platform, rootPath) {
@@ -11,11 +11,11 @@ class IconResolver {
   }
 
   resolve() {
-    var iconFileName =
+    const iconFileName =
       this.platform == this.win32Platform
         ? this.win32FileName
         : this.otherFileName;
-    var result = path.join(this.rootPath, iconFileName);
+    const result = path.join(this.rootPath, iconFileName);
     return result;
   }
 }

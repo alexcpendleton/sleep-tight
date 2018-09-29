@@ -1,14 +1,12 @@
-'use strict'
+'use strict';
+
 class GlobalConsoleLogSleeper {
-  constructor() {
-  }
+  constructor() {}
   sleepNow() {
-    console.log(`Pseudo going to sleep now.`);
+    console.log("Pseudo going to sleep now.");
   }
   sleepIn(milliseconds) {
-    
-    console.log(`Pseudo going to sleep after '${milliseconds}' milliseconds.`)
-    
+    console.log(`Pseudo going to sleep after '${milliseconds}' milliseconds.`);
   }
 }
 module.exports = GlobalConsoleLogSleeper;

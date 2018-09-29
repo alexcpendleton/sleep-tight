@@ -21,20 +21,21 @@ const createWindow = async () => {
 
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
+  const openDevTools = false;
   new Initializer({
     mainWindow,
     isDevMode,
     indexPath,
     iconPath,
     app,
-    openDevTools: isDevMode
+    openDevTools
   }).initialize();
 
-  let installDevTools = true;
+  const installDevTools = true;
   // Open the DevTools.
   if (installDevTools) {
     await installExtension(REACT_DEVELOPER_TOOLS);
-    //mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

@@ -71,10 +71,10 @@ class Main extends Component {
   }
 
   handleOnChosen(chosenMilliseconds) {
-    this.setState({ chosenMilliseconds: chosenMilliseconds });
+    this.setState({ chosenMilliseconds });
   }
   handleOnFinished() {
-    var shouldSleep = this.state.shouldSleep;
+    const shouldSleep = this.state.shouldSleep;
     if (shouldSleep) {
       this.props.signaler.sleep();
     } else {
@@ -83,7 +83,7 @@ class Main extends Component {
   }
   handleOnModeChanged(shouldSleep) {
     this.setState({
-      shouldSleep: shouldSleep
+      shouldSleep,
     });
   }
 }

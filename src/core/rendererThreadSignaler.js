@@ -1,5 +1,5 @@
 import { ipcRenderer, remote } from 'electron';
-import Commands from './commands'
+import Commands from './commands';
 
 class RendererThreadSignaler {
   constructor() {

@@ -66,7 +66,7 @@ class Remaining extends Component {
     });
   }
   start() {
-    var remaining = this.state.remainingMilliseconds;
+    let remaining = this.state.remainingMilliseconds;
     if (remaining == 0) {
       remaining = this.state.allottedMilliseconds;
     }
@@ -110,9 +110,9 @@ class Remaining extends Component {
       .padStart(2, "0");
   }
   renderMilliseconds(milliseconds) {
-    var seconds = this.parsePad((milliseconds / 1000) % 60);
-    var minutes = this.parsePad((milliseconds / (1000 * 60)) % 60);
-    var hours = this.parsePad((milliseconds / (1000 * 60 * 60)) % 24);
+    const seconds = this.parsePad((milliseconds / 1000) % 60);
+    const minutes = this.parsePad((milliseconds / (1000 * 60)) % 60);
+    const hours = this.parsePad((milliseconds / (1000 * 60 * 60)) % 24);
     return `${hours}:${minutes}:${seconds}`;
   }
   renderStateMilliseconds() {

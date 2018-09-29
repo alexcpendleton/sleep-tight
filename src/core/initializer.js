@@ -21,11 +21,11 @@ export class Initializer {
     this.iconPath = iconPath;
     this.big = big || false;
     this.app = app;
-    this.openDevTools = this.openDevTools || false;
+    this.openDevTools = openDevTools || false;
   }
   initialize() {
     this.hideMainWindow();
-    var mb = this.initMenubar();
+    const mb = this.initMenubar();
     this.setupSignaling();
     this.setupMainMenu(mb);
   }
@@ -49,10 +49,13 @@ export class Initializer {
   }
 
   initMenubar() {
-    var iconPath = new IconResolver(process.platform, this.iconPath).resolve();
-    var dimensions = this.getWindowDimensions();
+    const iconPath = new IconResolver(
+      process.platform,
+      this.iconPath
+    ).resolve();
+    const dimensions = this.getWindowDimensions();
     const alwaysOnTop = false;
-    var mb = menubar({
+    const mb = menubar({
       dir: __dirname,
       icon: iconPath,
       preloadWindow: true,

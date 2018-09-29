@@ -4,7 +4,7 @@ class PowerOffPowerSwitcher {
   }
   powerOff() {
     console.log("powering off");
-    this.switch((err, stderr, stdout)=>{
+    this.switch((err, stderr, stdout) => {
       console.log(arguments);
     });
   }
