@@ -15,17 +15,22 @@ class SleepShutdownButtons extends Component {
   }
   render() {
     const selected = this.state.sleep ? "sleep" : "shutdown";
+    const style = Object.assign(
+      {},
+      {
+        background: "transparent",
+        borderRadius: 0,
+        border: 0,
+        boxShadow: "none"
+      },
+      this.props.style || {}
+    );
     return (
       <ToggleButtonGroup
         value={selected}
         exclusive
         onChange={this.handleChange}
-        style={{
-          background: "transparent",
-          borderRadius: 0,
-          border: 0,
-          boxShadow: "none"
-        }}
+        style={style}
       >
         <ToggleButton value="shutdown">Shut Down</ToggleButton>
         <ToggleButton value="sleep">Sleep</ToggleButton>

@@ -45,7 +45,7 @@ export class Initializer {
     if (this.big) {
       return { width: 1024, height: 768 };
     }
-    return { width: 280, height: 200 };
+    return { width: 280, height: 180 };
   }
 
   initMenubar() {

@@ -36,10 +36,12 @@ class Main extends Component {
       palette: {
         type: "dark",
         primary: {
-          main: "#007AFF"
+          main: "#dcdcaa",
+          contrastText: "#dcdcaa"
         },
         secondary: {
-          main: "#007AFF"
+          main: "#dcdcaa",
+          contrastText: "#dcdcaa"
         }
       }
     });
@@ -49,7 +51,10 @@ class Main extends Component {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <div style={{ textAlign: "center", padding: "24px 12px 0 12px" }}>
-            <SleepShutdownButtons onModeChanged={this.handleOnModeChanged} />
+            <SleepShutdownButtons
+              style={{ display: "none" }}
+              onModeChanged={this.handleOnModeChanged}
+            />
             <div style={{ marginTop: "12px" }}>
               <Chooser
                 onChosen={this.handleOnChosen}
@@ -83,7 +88,7 @@ class Main extends Component {
   }
   handleOnModeChanged(shouldSleep) {
     this.setState({
-      shouldSleep,
+      shouldSleep
     });
   }
 }
