@@ -62,7 +62,12 @@ export class Initializer {
       width: dimensions.width,
       height: dimensions.height,
       index: this.indexPath,
-      alwaysOnTop
+      alwaysOnTop,
+      resizable: false,
+      movable: false,
+      skipTaskbar: true,
+      frame: false,
+      autoHideMenuBar: true
     });
     mb.on("ready", () => {
       console.log("app is ready");
