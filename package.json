@@ -1,8 +1,8 @@
 {
-  "name": "sleep-tight",
-  "productName": "sleep-tight",
+  "name": "sleep-tight-app",
+  "productName": "Sleep Tight",
   "version": "1.0.0",
-  "description": "Menubar sleep/shutdown timer.",
+  "description": "Put your computer to sleep after some time, via your menubar.",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -58,8 +58,8 @@
         "prerelease": true
       },
       "windowsStoreConfig": {
-        "packageName": "",
-        "name": "sleeptight"
+        "packageName": "Sleep Tight",
+        "name": "Sleep Tight"
       }
     }
   },
