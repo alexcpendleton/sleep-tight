@@ -47,6 +47,7 @@ class Remaining extends Component {
     if (props.allottedMilliseconds != this.state.allottedMilliseconds) {
       return true;
     }
+    if (props.started) return true;
     return false;
   }
 
@@ -57,7 +58,15 @@ class Remaining extends Component {
           allottedMilliseconds: newProps.allottedMilliseconds,
           remainingMilliseconds: newProps.allottedMilliseconds
         },
-        () => this.start()
+        () => {
+          // Prevents going to sleep when dragged to the
+          // beginning but not yet released
+          if (newProps.started) {
+            this.start();
+          } else {
+            this.pause();
+          }
+        }
       );
     }
   }

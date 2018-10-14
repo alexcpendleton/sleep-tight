@@ -14,11 +14,16 @@ class Chooser extends Component {
       tip: "0",
       showTip: false
     };
-    this.triggerChange = this.triggerChange.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.triggerHandlerWithMinValue = this.triggerHandlerWithMinValue.bind(
+      this
+    );
   }
   updateTip(event) {
+    return;
     const target = event.target;
     const mousePosition = event.clientX;
     const sliderWidth = target.clientWidth;
@@ -57,13 +62,13 @@ class Chooser extends Component {
     this.updateTip(event);
   }
   handleMouseOut(event) {
-    1;
     this.setState({
       showTip: false,
       tip: "0:00:00"
     });
   }
   renderTip() {
+    return ""; // temporarily(?) disabled
     const textStyle = {
       visibility: this.state.showTip ? "" : "hidden",
       position: "absolute",
@@ -97,27 +102,33 @@ class Chooser extends Component {
           max={max}
           value={this.state.chosenMilliseconds}
           step={this.state.step}
-          onChange={this.triggerChange}
+          onChange={this.handleDrag}
           onMouseMove={this.handleMouseMove}
           onMouseOut={this.handleMouseOut}
+          onMouseUp={this.handleMouseUp}
           style={{ width: "100%", margin: 0 }}
         />
       </div>
     );
   }
-  triggerChange(event, newValue) {
-    console.log("triggerChange", event, newValue, event.target.value);
+  triggerHandlerWithMinValue(event, newValue, handler) {
+    if (!handler) return;
     if (!newValue) {
       newValue = event.target.value;
       if (newValue <= 1000) {
         newValue = 1000;
       }
     }
-    if (!this.props.onChosen) return;
     this.setState({
       chosenMilliseconds: newValue
     });
-    this.props.onChosen(newValue);
+    handler(newValue);
+  }
+  handleDrag(event, newValue) {
+    this.triggerHandlerWithMinValue(event, newValue, this.props.onDrag);
+  }
+  handleMouseUp(event, newValue) {
+    this.triggerHandlerWithMinValue(event, newValue, this.props.onChosen);
   }
 }
 

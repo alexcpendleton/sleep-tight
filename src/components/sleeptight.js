@@ -25,9 +25,11 @@ class Main extends Component {
     super(props);
     this.state = {
       chosenMilliseconds: 3600000,
-      shouldSleep: true
+      shouldSleep: true,
+      isDragging: false
     };
     this.handleOnChosen = this.handleOnChosen.bind(this);
+    this.handleOnDrag = this.handleOnDrag.bind(this);
     this.handleOnFinished = this.handleOnFinished.bind(this);
     this.handleOnModeChanged = this.handleOnModeChanged.bind(this);
   }
@@ -57,6 +59,7 @@ class Main extends Component {
             />
             <div style={{}}>
               <Chooser
+                onDrag={this.handleOnDrag}
                 onChosen={this.handleOnChosen}
                 chosenMilliseconds={this.state.chosenMilliseconds}
               />
@@ -67,6 +70,7 @@ class Main extends Component {
                 onFinished={this.handleOnFinished}
                 timer={this.props.timer}
                 theme={theme}
+                started={!this.state.isDragging}
               />
             </div>
           </div>
@@ -75,10 +79,17 @@ class Main extends Component {
     );
   }
 
+  handleOnDrag(chosenMilliseconds) {
+    this.setState({ chosenMilliseconds, isDragging: true });
+  }
   handleOnChosen(chosenMilliseconds) {
-    this.setState({ chosenMilliseconds });
+    this.setState({
+      chosenMilliseconds,
+      isDragging: false
+    });
   }
   handleOnFinished() {
+    if (this.state.isDragging) return;
     const shouldSleep = this.state.shouldSleep;
     if (shouldSleep) {
       this.props.signaler.sleep();
