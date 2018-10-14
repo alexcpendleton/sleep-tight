@@ -26,21 +26,41 @@ class Chooser extends Component {
   renderHtmlRangeSlider() {
     const max = this.state.maxMilliseconds;
     const theme = this.props.theme;
-    console.log(theme);
+    const ticksId = "ticks";
     return (
-      <input
-        type="range"
-        min="0"
-        max={max}
-        value={this.state.chosenMilliseconds}
-        step={this.state.step}
-        onChange={this.handleDrag}
-        onMouseUp={this.handleMouseUp}
-        style={{
-          width: "100%",
-          margin: 0
-        }}
-      />
+      <React.Fragment>
+        {this.renderTicksDatalist(ticksId)}
+        <input
+          type="range"
+          min="0"
+          max={max}
+          value={this.state.chosenMilliseconds}
+          step={this.state.step}
+          onChange={this.handleDrag}
+          onMouseUp={this.handleMouseUp}
+          style={{
+            width: "100%",
+            margin: 0
+          }}
+          list={ticksId}
+        />
+      </React.Fragment>
+    );
+  }
+  renderTicksDatalist(id) {
+    // put a tick mark at every ten minutes
+    const interval = 600000; // 600000=10 min
+    const ticks = [];
+    const max = this.state.maxMilliseconds;
+    for (let i = interval; i < max; i += interval) {
+      ticks.push(i);
+    }
+    return (
+      <datalist id={id}>
+        {ticks.map(i => (
+          <option key={i} value={i} label={formatMilliseconds(i)} />
+        ))}
+      </datalist>
     );
   }
   triggerHandlerWithMinValue(event, newValue, handler) {
