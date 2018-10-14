@@ -21,15 +21,17 @@ const createWindow = async () => {
 
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
-  const openDevTools = false;
-  new Initializer({
+  const openDevTools = true;
+  const initializer = new Initializer({
     mainWindow,
     isDevMode,
     indexPath,
     iconPath,
     app,
     openDevTools
-  }).initialize();
+  });
+  initializer.initialize();
+  initializer.mb.showWindow();
 
   const installDevTools = true;
   // Open the DevTools.

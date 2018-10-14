@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AvPause from "@material-ui/icons/pause";
 import AvPlayArrow from "@material-ui/icons/PlayArrow";
 import AvReplay from "@material-ui/icons/replay";
+import { formatMilliseconds } from "../core/time";
 
 class Remaining extends Component {
   constructor(props, context) {
@@ -104,19 +105,8 @@ class Remaining extends Component {
     });
     this.props.onFinished();
   }
-  parsePad(i) {
-    return parseInt(i)
-      .toString()
-      .padStart(2, "0");
-  }
-  renderMilliseconds(milliseconds) {
-    const seconds = this.parsePad((milliseconds / 1000) % 60);
-    const minutes = this.parsePad((milliseconds / (1000 * 60)) % 60);
-    const hours = this.parsePad((milliseconds / (1000 * 60 * 60)) % 24);
-    return `${hours}:${minutes}:${seconds}`;
-  }
   renderStateMilliseconds() {
-    return this.renderMilliseconds(this.state.remainingMilliseconds);
+    return formatMilliseconds(this.state.remainingMilliseconds);
   }
   render() {
     const buttonStyle = { color: this.props.theme.palette.text.secondary };

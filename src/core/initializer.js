@@ -25,9 +25,9 @@ export class Initializer {
   }
   initialize() {
     this.hideMainWindow();
-    const mb = this.initMenubar();
+    this.mb = this.initMenubar();
     this.setupSignaling();
-    this.setupMainMenu(mb);
+    this.setupMainMenu(this.mb);
   }
   hideMainWindow() {
     if (this.mainWindow) {
@@ -54,7 +54,7 @@ export class Initializer {
       this.iconPath
     ).resolve();
     const dimensions = this.getWindowDimensions();
-    const alwaysOnTop = false;
+    const alwaysOnTop = true;
     const mb = menubar({
       dir: __dirname,
       icon: iconPath,
@@ -69,6 +69,7 @@ export class Initializer {
       frame: false,
       autoHideMenuBar: true
     });
+
     mb.on("ready", () => {
       console.log("app is ready");
     });
@@ -76,7 +77,7 @@ export class Initializer {
       if (this.hasBeenSetup) return;
 
       if (this.openDevTools) {
-        mb.window.webContents.openDevTools("detach");
+        mb.window.webContents.openDevTools();
       }
       this.hasBeenSetup = true;
     });

@@ -55,7 +55,7 @@ class Main extends Component {
               style={{ display: "none" }}
               onModeChanged={this.handleOnModeChanged}
             />
-            <div style={{ marginTop: "12px" }}>
+            <div style={{}}>
               <Chooser
                 onChosen={this.handleOnChosen}
                 chosenMilliseconds={this.state.chosenMilliseconds}
