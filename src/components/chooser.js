@@ -15,100 +15,32 @@ class Chooser extends Component {
       showTip: false
     };
     this.handleDrag = this.handleDrag.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.triggerHandlerWithMinValue = this.triggerHandlerWithMinValue.bind(
       this
     );
   }
-  updateTip(event) {
-    return;
-    const target = event.target;
-    const mousePosition = event.clientX;
-    const sliderWidth = target.clientWidth;
-    const mousePositionWithinSlider = mousePosition - target.offsetLeft;
-    let percentage = mousePositionWithinSlider / sliderWidth;
-    if (percentage > 100) {
-      percentage = 100;
-    } else if (percentage < 0) {
-      percentage = 0;
-    }
-    const step = this.state.step;
-    const max = parseInt(target.getAttribute("max"), 10);
-    let pos = max * percentage;
-    if (pos > max) {
-      pos = max;
-    }
-    const formatted = formatMilliseconds(pos);
-    let tipX = mousePosition;
-    let tipWidth = this.props.tipWidth;
-
-    let something = sliderWidth - tipWidth;
-
-    if (tipX > something) {
-      tipX = sliderWidth - tipWidth;
-    } else if (tipX < event.target.offsetLeft) {
-      tipX = 0;
-    }
-    this.setState({
-      tip: formatted,
-      showTip: true,
-      tipX: tipX
-    });
-    return pos;
-  }
-  handleMouseMove(event) {
-    this.updateTip(event);
-  }
-  handleMouseOut(event) {
-    this.setState({
-      showTip: false,
-      tip: "0:00:00"
-    });
-  }
-  renderTip() {
-    return ""; // temporarily(?) disabled
-    const textStyle = {
-      visibility: this.state.showTip ? "" : "hidden",
-      position: "absolute",
-      left: this.state.tipX,
-      background: "#212121",
-      zIndex: "-1",
-      padding: "5px 10px"
-    };
-    return (
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "30px"
-        }}
-      >
-        <Typography color="textSecondary" style={textStyle}>
-          {this.state.tip}
-        </Typography>
-      </div>
-    );
-  }
   render() {
+    return this.renderHtmlRangeSlider();
+  }
+  renderHtmlRangeSlider() {
     const max = this.state.maxMilliseconds;
+    const theme = this.props.theme;
+    console.log(theme);
     return (
-      <div>
-        {this.renderTip()}
-        <input
-          type="range"
-          min="0"
-          max={max}
-          value={this.state.chosenMilliseconds}
-          step={this.state.step}
-          onChange={this.handleDrag}
-          onMouseMove={this.handleMouseMove}
-          onMouseOut={this.handleMouseOut}
-          onMouseUp={this.handleMouseUp}
-          style={{ width: "100%", margin: 0 }}
-        />
-      </div>
+      <input
+        type="range"
+        min="0"
+        max={max}
+        value={this.state.chosenMilliseconds}
+        step={this.state.step}
+        onChange={this.handleDrag}
+        onMouseUp={this.handleMouseUp}
+        style={{
+          width: "100%",
+          margin: 0
+        }}
+      />
     );
   }
   triggerHandlerWithMinValue(event, newValue, handler) {

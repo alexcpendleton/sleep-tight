@@ -62,6 +62,7 @@ class Main extends Component {
                 onDrag={this.handleOnDrag}
                 onChosen={this.handleOnChosen}
                 chosenMilliseconds={this.state.chosenMilliseconds}
+                theme={theme}
               />
             </div>
             <div style={{ textAlign: "center" }}>

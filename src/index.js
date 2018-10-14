@@ -16,12 +16,14 @@ if (isDevMode) enableLiveReload({ strategy: "react-hmr" });
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    radii: [0, 0, 0, 0]
   });
 
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
-  const openDevTools = true;
+  const openDevTools = false;
+  const openAutomatically = false;
   const initializer = new Initializer({
     mainWindow,
     isDevMode,
@@ -31,7 +33,9 @@ const createWindow = async () => {
     openDevTools
   });
   initializer.initialize();
-  initializer.mb.showWindow();
+  if (openAutomatically) {
+    initializer.mb.showWindow();
+  }
 
   const installDevTools = true;
   // Open the DevTools.
