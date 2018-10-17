@@ -1,7 +1,7 @@
 {
   "name": "sleep-tight-app",
   "productName": "Sleep Tight",
-  "version": "0.9.05",
+  "version": "0.9.6",
   "description": "Put your computer to sleep after some time, via your menubar.",
   "main": "src/index.js",
   "scripts": {
@@ -45,7 +45,8 @@
       },
       "electronPackagerConfig": {
         "packageManager": "yarn",
-        "icon": "src/resources/icon.icns"
+        "icon": "src/resources/icon.icns",
+        "osxSign": true
       },
       "electronWinstallerConfig": {
         "name": "sleep_tight"
