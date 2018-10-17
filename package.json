@@ -1,7 +1,7 @@
 {
   "name": "sleep-tight-app",
   "productName": "Sleep Tight",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Put your computer to sleep after some time, via your menubar.",
   "main": "src/index.js",
   "scripts": {
