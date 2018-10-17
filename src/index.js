@@ -24,13 +24,15 @@ const createWindow = async () => {
   const iconPath = `${__dirname}/resources/icons`;
   const openDevTools = false;
   const openAutomatically = false;
+  const alwaysOnTop = false;
   const initializer = new Initializer({
     mainWindow,
     isDevMode,
     indexPath,
     iconPath,
     app,
-    openDevTools
+    openDevTools,
+    alwaysOnTop
   });
   initializer.initialize();
   if (openAutomatically) {

@@ -11,7 +11,8 @@ export class Initializer {
     iconPath,
     big,
     app,
-    openDevTools
+    openDevTools,
+    alwaysOnTop
   }) {
     this.mainWindow = mainWindow;
     this.isDevMode = isDevMode || false;
@@ -22,6 +23,7 @@ export class Initializer {
     this.big = big || false;
     this.app = app;
     this.openDevTools = openDevTools || false;
+    this.alwaysOnTop = this.alwaysOnTop || false;
   }
   initialize() {
     this.hideMainWindow();
@@ -54,7 +56,7 @@ export class Initializer {
       this.iconPath
     ).resolve();
     const dimensions = this.getWindowDimensions();
-    const alwaysOnTop = true;
+    const alwaysOnTop = this.alwaysOnTop;
     const mb = menubar({
       dir: __dirname,
       icon: iconPath,
