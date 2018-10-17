@@ -12,7 +12,8 @@
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src",
     "omp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight",
-    "fix": "eslint --fix src/*"
+    "fix": "eslint --fix src/*",
+    "bump": "npm version patch && git add . && git commit -m 'Bump version' && git push"
   },
   "keywords": [],
   "repository": {
