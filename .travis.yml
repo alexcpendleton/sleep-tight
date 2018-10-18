@@ -1,16 +1,16 @@
 language: node_js
 node_js: "6"
 os:
-  - linux
+  #- linux
   - osx
 dist: trusty
 osx_image: xcode8.3
 sudo: false
 
-cache:
-  directories:
-    - node_modules
-    - $HOME/.cache/electron
+# cache:
+#   directories:
+#     - node_modules
+#     - $HOME/.cache/electron
 
 addons:
   apt:
@@ -29,5 +29,6 @@ install:
   - npm update
 
 script:
+  - security find-identity -p codesigning -v
   - if test -z "$TRAVIS_TAG"; then npm run make; fi
 after_success: if test -n "$TRAVIS_TAG"; then npm run publish; fi
