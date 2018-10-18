@@ -1,7 +1,7 @@
 {
   "name": "sleep-tight-app",
   "productName": "Sleep Tight",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "Put your computer to sleep after some time, via your menubar.",
   "main": "src/index.js",
   "scripts": {
@@ -13,7 +13,8 @@
     "lint": "eslint --cache --color --ext .jsx,.js src",
     "omp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight",
     "fix": "eslint --fix src/*",
-    "bump": "npm version patch && git push"
+    "bump": "npm version patch && git push",
+    "publocal": "rm -rf node_modules && yarn install && electron-forge publish"
   },
   "keywords": [],
   "repository": {
@@ -36,7 +37,6 @@
           "squirrel"
         ],
         "darwin": [
-          "zip",
           "dmg"
         ],
         "linux": [
