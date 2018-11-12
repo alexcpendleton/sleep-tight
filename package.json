@@ -14,7 +14,9 @@
     "omp": "open out/sleep-tight-darwin-x64/sleep-tight.app/Contents/MacOS/sleep-tight",
     "fix": "eslint --fix src/*",
     "bump": "npm version patch && git push",
-    "publocal": "rm -rf node_modules && yarn install && electron-forge publish"
+    "publocalmac": "rm -rf node_modules && yarn install && electron-forge publish",
+    "publocallinux": "rm -rf node_modules && yarn install && electron-forge publish --platform=linux",
+    "publocalwin": "rm -rf node_modules && yarn install && electron-forge publish --platform=win32"
   },
   "keywords": [],
   "repository": {
