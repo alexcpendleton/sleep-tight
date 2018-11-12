@@ -77,7 +77,7 @@ class Remaining extends Component {
   }
   start() {
     let remaining = this.state.remainingMilliseconds;
-    if (remaining == 0) {
+    if (remaining === 0) {
       remaining = this.state.allottedMilliseconds;
     }
     this.setState({
@@ -109,10 +109,16 @@ class Remaining extends Component {
     );
   }
   finish() {
-    this.setState({
-      started: false
-    });
-    this.props.onFinished();
+    this.setState(
+      {
+        remainingMilliseconds: this.state.allottedMilliseconds,
+        started: false
+      },
+      () => {
+        this.pause();
+        this.props.onFinished();
+      }
+    );
   }
   renderStateMilliseconds() {
     return formatMilliseconds(this.state.remainingMilliseconds);
