@@ -136,25 +136,6 @@ class Remaining extends Component {
     );
   }
   render() {
-    return (
-      <div>
-        <Typography
-          color="textSecondary"
-          style={{
-            padding: "0",
-            margin: "0",
-            position: "relative",
-            width: "70px",
-            margin: "0 auto",
-            height: this.height
-          }}
-        >
-          {this.renderPlaybackButton()} {this.renderStateMilliseconds()}
-        </Typography>
-      </div>
-    );
-  }
-  renderPlaybackButton() {
     const buttonStyle = {
       color: this.props.theme.palette.text.secondary,
       height: this.height,
@@ -167,6 +148,51 @@ class Remaining extends Component {
       padding: "0",
       position: "absolute"
     };
+    return (
+      <div style={{ marginTop: "5px" }}>
+        <Typography
+          color="textSecondary"
+          style={{
+            padding: "0",
+            margin: "0",
+            position: "relative",
+            width: "80px",
+            margin: "0 auto",
+            height: this.height,
+            whiteSpace: "nowrap"
+          }}
+        >
+          {this.renderPlaybackButton(buttonStyle, iconStyle)}
+          {this.renderStateMilliseconds()}
+          {this.renderRestartButton(buttonStyle, iconStyle)}
+        </Typography>
+      </div>
+    );
+  }
+  renderRestartButton(buttonStyle, iconStyle) {
+    const disabled =
+      this.state.started ||
+      this.state.remainingMilliseconds === this.state.allottedMilliseconds;
+    const containerStyle = {
+      position: "absolute",
+      right: "-30px",
+      top: "0",
+      display: "inline-block",
+      o
+    };
+    const button = (
+      <IconButton
+        id="restart"
+        tooltip="Restart"
+        onClick={this.restart}
+        style={buttonStyle}
+      >
+        <AvReplay style={iconStyle} />
+      </IconButton>
+    );
+    return <span style={containerStyle}>{button}</span>;
+  }
+  renderPlaybackButton(buttonStyle, iconStyle) {
     const isStarted = this.state.started;
     let button;
     if (isStarted) {
