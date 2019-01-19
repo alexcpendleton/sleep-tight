@@ -177,8 +177,7 @@ class Remaining extends Component {
       position: "absolute",
       right: "-30px",
       top: "0",
-      display: "inline-block",
-      o
+      display: "inline-block"
     };
     const button = (
       <IconButton
