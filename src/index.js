@@ -26,7 +26,7 @@ const createWindow = async () => {
   let openAutomatically = true;
   let alwaysOnTop = true;
   let big = true;
-  const debugFlag = true;
+  const debugFlag = false;
 
   if (debugFlag) {
     openDevTools = true;
