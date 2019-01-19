@@ -22,9 +22,17 @@ const createWindow = async () => {
 
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
-  const openDevTools = false;
-  const openAutomatically = false;
-  const alwaysOnTop = false;
+  let openDevTools = true;
+  let openAutomatically = true;
+  let alwaysOnTop = true;
+  let big = true;
+  const debugFlag = true;
+
+  if (debugFlag) {
+    openDevTools = true;
+    openAutomatically = true;
+    alwaysOnTop = true;
+  }
   const initializer = new Initializer({
     mainWindow,
     isDevMode,
@@ -32,14 +40,15 @@ const createWindow = async () => {
     iconPath,
     app,
     openDevTools,
-    alwaysOnTop
+    alwaysOnTop,
+    big
   });
   initializer.initialize();
   if (openAutomatically) {
     initializer.mb.showWindow();
   }
 
-  const installDevTools = true;
+  const installDevTools = openDevTools;
   // Open the DevTools.
   if (installDevTools) {
     await installExtension(REACT_DEVELOPER_TOOLS);

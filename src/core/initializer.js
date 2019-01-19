@@ -12,7 +12,8 @@ export class Initializer {
     big,
     app,
     openDevTools,
-    alwaysOnTop
+    alwaysOnTop,
+    devToolsMode
   }) {
     this.mainWindow = mainWindow;
     this.isDevMode = isDevMode || false;
@@ -24,6 +25,7 @@ export class Initializer {
     this.app = app;
     this.openDevTools = openDevTools || false;
     this.alwaysOnTop = this.alwaysOnTop || false;
+    this.devToolsMode = devToolsMode || "docked";
   }
   initialize() {
     this.hideMainWindow();
@@ -79,7 +81,10 @@ export class Initializer {
       if (this.hasBeenSetup) return;
 
       if (this.openDevTools) {
-        mb.window.webContents.openDevTools();
+        mb.window.webContents.openDevTools({
+          mode: this.devToolsMode,
+          activate: true
+        });
       }
       this.hasBeenSetup = true;
     });
