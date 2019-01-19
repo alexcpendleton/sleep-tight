@@ -1,7 +1,7 @@
 language: node_js
-node_js: "6"
+node_js: "11"
 os:
-  #- linux
+  - linux
   - osx
 dist: trusty
 osx_image: xcode8.3
