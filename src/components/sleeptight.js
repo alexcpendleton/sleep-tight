@@ -52,7 +52,14 @@ class Main extends Component {
       <React.Fragment>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <div style={{ textAlign: "center", padding: "24px 12px 0 12px" }}>
+          <div
+            style={{
+              textAlign: "center",
+              padding: "24px 12px 0 12px",
+              width: 280,
+              height: 100
+            }}
+          >
             <SleepShutdownButtons
               style={{ display: "none" }}
               onModeChanged={this.handleOnModeChanged}

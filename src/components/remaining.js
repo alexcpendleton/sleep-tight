@@ -32,11 +32,13 @@ class Remaining extends Component {
     this.pause = this.pause.bind(this);
     this.restart = this.restart.bind(this);
     this.renderStateMilliseconds = this.renderStateMilliseconds.bind(this);
+    this.renderPlaybackButton = this.renderPlaybackButton.bind(this);
     this.finish = this.finish.bind(this);
     this.tick = this.tick.bind(this);
     this.hasFreshAllottedMilliseconds = this.hasFreshAllottedMilliseconds.bind(
       this
     );
+    this.height = "24px";
   }
   componentWillReceiveProps(newProps) {
     this.initiateStartFromNewPropsIfNecessary(newProps);
@@ -121,46 +123,82 @@ class Remaining extends Component {
     );
   }
   renderStateMilliseconds() {
-    return formatMilliseconds(this.state.remainingMilliseconds);
+    return (
+      <span
+        style={{
+          display: "inline-block",
+          height: this.height,
+          lineHeight: this.height
+        }}
+      >
+        {formatMilliseconds(this.state.remainingMilliseconds)}
+      </span>
+    );
   }
   render() {
-    const buttonStyle = { color: this.props.theme.palette.text.secondary };
     return (
-      <React.Fragment>
-        <Typography color="textSecondary" style={{ padding: "10px 0" }}>
-          {this.renderStateMilliseconds()}
+      <div>
+        <Typography
+          color="textSecondary"
+          style={{
+            padding: "0",
+            margin: "0",
+            position: "relative",
+            width: "70px",
+            margin: "0 auto",
+            height: this.height
+          }}
+        >
+          {this.renderPlaybackButton()} {this.renderStateMilliseconds()}
         </Typography>
-        <div>
-          {this.state.started ? (
-            <IconButton
-              id="pause"
-              tooltip="Pause"
-              onClick={this.pause}
-              style={buttonStyle}
-            >
-              <AvPause />
-            </IconButton>
-          ) : (
-            <IconButton
-              id="start"
-              tooltip="Start"
-              onClick={this.start}
-              style={buttonStyle}
-            >
-              <AvPlayArrow />
-            </IconButton>
-          )}
-          <IconButton
-            id="restart"
-            tooltip="Restart"
-            onClick={this.restart}
-            style={buttonStyle}
-          >
-            <AvReplay />
-          </IconButton>
-        </div>
-      </React.Fragment>
+      </div>
     );
+  }
+  renderPlaybackButton() {
+    const buttonStyle = {
+      color: this.props.theme.palette.text.secondary,
+      height: this.height,
+      width: this.height
+    };
+    const iconStyle = {
+      height: this.height,
+      width: this.height,
+      margin: "0",
+      padding: "0",
+      position: "absolute"
+    };
+    const isStarted = this.state.started;
+    let button;
+    if (isStarted) {
+      button = (
+        <IconButton
+          id="pause"
+          tooltip="Pause"
+          onClick={this.pause}
+          style={buttonStyle}
+        >
+          <AvPause style={iconStyle} />
+        </IconButton>
+      );
+    } else {
+      button = (
+        <IconButton
+          id="start"
+          tooltip="Start"
+          onClick={this.start}
+          style={buttonStyle}
+        >
+          <AvPlayArrow style={iconStyle} />
+        </IconButton>
+      );
+    }
+    const containerStyle = {
+      position: "absolute",
+      left: "-30px",
+      top: "0",
+      display: "inline-block"
+    };
+    return <span style={containerStyle}>{button}</span>;
   }
 }
 
