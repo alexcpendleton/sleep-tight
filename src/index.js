@@ -22,16 +22,17 @@ const createWindow = async () => {
 
   const indexPath = `file://${__dirname}/index.html`;
   const iconPath = `${__dirname}/resources/icons`;
-  let openDevTools = true;
-  let openAutomatically = true;
-  let alwaysOnTop = true;
-  let big = true;
+  let openDevTools = false;
+  let openAutomatically = false;
+  let alwaysOnTop = false;
+  let big = false;
   const debugFlag = false;
 
   if (debugFlag) {
     openDevTools = true;
     openAutomatically = true;
     alwaysOnTop = true;
+    big = true;
   }
   const initializer = new Initializer({
     mainWindow,
