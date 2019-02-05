@@ -29,4 +29,4 @@ install:
   - npm update
 
 script:
-  - if test -z "$TRAVIS_TAG"; then npm run publish --platform=linux; fi
+  - if test -z "$TRAVIS_TAG"; then npm run publish; fi
