@@ -2,7 +2,7 @@ language: node_js
 node_js: "11"
 os:
   - linux
-  - osx
+#  - osx
 dist: trusty
 osx_image: xcode8.3
 sudo: false
@@ -29,5 +29,4 @@ install:
   - npm update
 
 script:
-  - if test -z "$TRAVIS_TAG"; then npm run make; fi
-after_success: if test -n "$TRAVIS_TAG"; then npm run publish; fi
+  - if test -z "$TRAVIS_TAG"; then npm run publish --platform=linux; fi
