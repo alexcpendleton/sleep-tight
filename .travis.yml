@@ -26,7 +26,6 @@ branches:
 
 install:
   - yarn install
-  - yarn update
 
 script:
   - yarn package
