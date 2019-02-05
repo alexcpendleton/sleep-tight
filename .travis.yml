@@ -28,4 +28,4 @@ install:
   - yarn install
 
 script:
-  - yarn package
+  - yarn publish
