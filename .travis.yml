@@ -25,7 +25,7 @@ branches:
     - /^v\d+\.\d+\.\d+/
 
 install:
-  - yarn install
+  - npm install
 
 script:
-  - yarn publish
+  - npm publish
