@@ -47,7 +47,7 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "yarn",
+        "packageManager": "npm",
         "icon": "src/resources/icon.icns",
         "osxSign": true
       },
