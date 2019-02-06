@@ -1,7 +1,7 @@
 {
   "name": "sleep-tight-app",
   "productName": "Sleep Tight",
-  "version": "0.9.15",
+  "version": "1.0.0",
   "description": "Put your computer to sleep after some time, via your menubar.",
   "main": "src/index.js",
   "scripts": {
@@ -56,7 +56,7 @@
         "owner": "alexcpendleton",
         "name": "sleep-tight",
         "draft": false,
-        "prerelease": true
+        "prerelease": false
       },
       "windowsStoreConfig": {
         "packageName": "Sleep Tight",
