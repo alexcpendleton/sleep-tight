@@ -40,10 +40,6 @@
         ],
         "darwin": [
           "dmg"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
         ]
       },
       "electronPackagerConfig": {
