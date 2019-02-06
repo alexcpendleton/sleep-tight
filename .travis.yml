@@ -2,7 +2,8 @@ language: node_js
 node_js: "11"
 os:
   #  - linux
-  - windows
+  # - windows
+  - osx
 dist: trusty
 osx_image: xcode8.3
 sudo: false
